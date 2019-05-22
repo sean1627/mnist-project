@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <title>Upload</title>
+    <style type="text/css"> 
+      .divcss5-right{width:320px; height:120px;border:1px solid #F08080;float:right} 
+/* css注释：对divcss5-right设置float:right即可让对象靠右浮动 */ 
+      .button_css
+{
+  background-color: blue;
+  color: white;
+  width: 100px;
+  height: 30px;
+}
+ 
+ .jumbotron{
+  height:500px;
+  align-items:center;
+  background:url("https://s4.51cto.com/oss/201903/25/0974c822dd7524cdcca7cc4f209269cc.jpg-wh_651x-s_671627396.jpg") ;
+  background-size:600px 500px;
+  background-repeat: no-repeat;
+  color: white;
+  margin-top:20px;
+}  
+</style> 
+  </head>
+ <body>
+  <div class="jumbotron" style="background-color:#010101">
+    
+    <h1 align="right"> Handwriting Digit &nbsp; <br /> Prediction  &nbsp;&nbsp; </h1>
+    <p align="right"> Please submitting a handwriting number image (.png or .jpg) &nbsp;&nbsp;</p>
+    <p align="right">Note: Image should be a black-and-white photograph &nbsp;&nbsp;</p>
+    <div class="container">
+   <div class="row">
+       <div class="divcss5-right">
+           <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+              <strong >&nbsp;Images:</strong><br>
+              <input id="filechose" type="file" name="file" accept="image/*" multiple><div id="msg"></div>
+              <input type="submit" class="button_css" value="Upload!" id="upload-button" >
+       </form>
+       </div>
+    </div>
+</div>
+  </div>
+ </body>
+
+
+ <script>
+
+    $("#filechose").change(function(){
+
+        var input = document.getElementById('filechose');
+
+        for (var i=0; i<input.files.length; i++)
+        {
+        //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+            var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+
+            if ((ext == 'jpg') || (ext == 'png'))
+            {
+                $("#msg").text("Images are supported")
+            }
+            else
+            {
+                $("#msg").text("Images are NOT supported")
+                document.getElementById("filechose").value ="";
+            }
+
+        }
+
+
+    } );
+
+</script>
+</html>
