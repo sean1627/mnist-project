@@ -74,7 +74,7 @@ In terminal, run this command
 
 Then use cqlsh command,
 
-`select * from keyspacetest.mytable`
+`select * from keyspacetest.mytable ;`
 
 
 
